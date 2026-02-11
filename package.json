@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pages:build": "npx @cloudflare/next-on-pages"
+    "start": "next start",
+    "lint": "eslint",
+    "pages:build": "npx @cloudflare/next-on-pages && echo '_worker.js' > .vercel/output/static/.assetsignore"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
