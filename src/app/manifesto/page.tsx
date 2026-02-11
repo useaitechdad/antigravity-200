@@ -23,13 +23,7 @@ export default function ManifestoPage() {
                     This channel is dedicated to demystifying the tools, hardware, and workflows that empower you to build at the speed of thought.
                 </p>
 
-                <h3>The Stack</h3>
-                <ul className="list-disc pl-5 space-y-2 text-slate-300">
-                    <li><strong>Core:</strong> Local LLMs (Ollama, LM Studio)</li>
-                    <li><strong>Orchestration:</strong> LangChain, AutoGen, CrewAI</li>
-                    <li><strong>Hardware:</strong> Mac Studio (M2 Ultra), NVIDIA 4090 Rigs</li>
-                    <li><strong>Philosophy:</strong> Private, Offline-First, High-Performance</li>
-                </ul>
+
 
             </article>
 
