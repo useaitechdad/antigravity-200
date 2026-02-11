@@ -13,10 +13,11 @@ export default async function BriefingPage() {
         videos = await getPlaylistVideos(SITE_CONFIG.youtube.playlists.briefing);
     }
 
-    // If playlist fetch failed (empty), try channel feed as backup
+    // If playlist fetch failed (empty), use static fallback
     if (videos.length === 0) {
-        console.log("Briefing playlist empty or failed, falling back to channel feed");
-        videos = await getChannelVideos(SITE_CONFIG.youtube.channelId);
+        console.log("Briefing playlist empty or failed, using static fallback");
+        const { FALLBACK_BRIEFING_VIDEOS } = await import("@/data/fallback");
+        videos = FALLBACK_BRIEFING_VIDEOS;
     }
 
     return (

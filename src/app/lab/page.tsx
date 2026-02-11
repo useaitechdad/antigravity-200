@@ -13,8 +13,9 @@ export default async function LabPage() {
     }
 
     if (videos.length === 0) {
-        console.log("Lab playlist empty or failed, falling back to channel feed");
-        videos = await getChannelVideos(SITE_CONFIG.youtube.channelId);
+        console.log("Lab playlist empty or failed, using static fallback");
+        const { FALLBACK_LAB_VIDEOS } = await import("@/data/fallback");
+        videos = FALLBACK_LAB_VIDEOS;
     }
 
     return (
