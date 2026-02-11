@@ -1,4 +1,4 @@
-import { getPlaylistVideos, getChannelVideos } from "@/lib/youtube";
+import { getPlaylistVideos, getChannelVideos, Video } from "@/lib/youtube";
 import { VideoGrid } from "@/components/content/VideoGrid";
 import { SITE_CONFIG } from "@/lib/config";
 
@@ -7,7 +7,7 @@ export const revalidate = 3600; // IR (Incremental Regen) every hour
 export default async function BriefingPage() {
     // Fallback to channel videos if playlist fails or is placeholder
     const isConfigured = !SITE_CONFIG.youtube.playlists.briefing.includes("PLACEHOLDER");
-    let videos = [];
+    let videos: Video[] = [];
 
     if (isConfigured) {
         videos = await getPlaylistVideos(SITE_CONFIG.youtube.playlists.briefing);

@@ -1,4 +1,4 @@
-import { getMergedPlaylistVideos, getChannelVideos } from "@/lib/youtube";
+import { getMergedPlaylistVideos, getChannelVideos, Video } from "@/lib/youtube";
 import { VideoGrid } from "@/components/content/VideoGrid";
 import { SITE_CONFIG } from "@/lib/config";
 
@@ -6,7 +6,7 @@ export const revalidate = 3600;
 
 export default async function LabPage() {
     const isConfigured = !SITE_CONFIG.youtube.playlists.lab[0].includes("PLACEHOLDER");
-    let videos = [];
+    let videos: Video[] = [];
 
     if (isConfigured) {
         videos = await getMergedPlaylistVideos(SITE_CONFIG.youtube.playlists.lab);
