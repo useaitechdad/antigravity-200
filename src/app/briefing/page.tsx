@@ -1,15 +1,23 @@
-import { getPlaylistVideos } from "@/lib/youtube";
+import { getPlaylistVideos, getChannelVideos } from "@/lib/youtube";
 import { VideoGrid } from "@/components/content/VideoGrid";
 import { SITE_CONFIG } from "@/lib/config";
 
 export const revalidate = 3600; // IR (Incremental Regen) every hour
 
 export default async function BriefingPage() {
-    // Fallback to empty array if ID is placeholder to prevent fetch errors
+    // Fallback to channel videos if playlist fails or is placeholder
     const isConfigured = !SITE_CONFIG.youtube.playlists.briefing.includes("PLACEHOLDER");
-    const videos = isConfigured
-        ? await getPlaylistVideos(SITE_CONFIG.youtube.playlists.briefing)
-        : [];
+    let videos = [];
+
+    if (isConfigured) {
+        videos = await getPlaylistVideos(SITE_CONFIG.youtube.playlists.briefing);
+    }
+
+    // If playlist fetch failed (empty), try channel feed as backup
+    if (videos.length === 0) {
+        console.log("Briefing playlist empty or failed, falling back to channel feed");
+        videos = await getChannelVideos(SITE_CONFIG.youtube.channelId);
+    }
 
     return (
         <main className="min-h-screen py-10 px-4 md:px-8 max-w-7xl mx-auto">
